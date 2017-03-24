@@ -1,0 +1,342 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>开发日志</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<script language="javascript" type="text/javascript">
+			function zhuangbi(){
+				alert("这个图标放在这是装逼的你懂吗，哪个让你点了？");
+			}
+		</script>
+	</head>
+	<body>
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<span class="image avatar"><img src="images/avatar.jpg" alt="" /></span>
+					<h1 id="logo"><a href="blog.html">Sun Haicker</a></h1>
+					<p>乐 &nbsp;&bull;&nbsp; 享 &nbsp;&bull;&nbsp; 生活<br />
+					就算是我，也曾像你们一样迷茫.</p>
+				</header>
+				<nav id="nav">
+					<ul>
+						<li><a href="blog.html#one">关于</a></li>
+						<li><a href="blog.html#two">读书笔记</a></li>
+						<li><a href="blog.html#three" class="active">开发日志</a></li>
+						<li><a href="blog.html#four">折腾日记</a></li>
+					</ul>
+				</nav>
+				<footer>
+					<ul class="icons">
+						<li><a href="javascript:zhuangbi();" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="javascript:zhuangbi();" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://github.com/haicker" class="icon fa-github"><span class="label">Github</span></a></li>
+						<li><a href="mailto:haichuan1996@live.com" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+					</ul>
+				</footer>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+
+							<section>
+								<div class="container">
+									<header class="major">
+										<h3>CSS样式重置</h3>
+										<p>很多浏览器是以自己的方式去理解CSS规范，导致有的浏览器对CSS的解释与我们设计的初衷相冲突，使得网页样式偏离设计。因此前端工程师会在编写样式前进行CSS Reset，即CSS样式重置.</p>
+									</header>
+									<hr />
+									<p><b style="font-size:32px">很</b>&nbsp;&nbsp;多HTML标签在浏览器里有默认的样式，例如 p 标签有上下边距，strong标签有字体加粗样式，em标签有字体倾斜样式。不同浏览器的默认样式之间也会有差别，例如ul默认带有缩进的样式，在IE下，它的缩进是通过margin实现的，而Firefox下，它的缩进是由padding实现的。<span class="image right"><img src="images/develop/2-1.jpg" alt="" /></span>在设计页面的时候，浏览器的默认样式往往会给我们带来麻烦，影响开发效率。所以解决方法就是一开始就将浏览器的默认样式全部去掉，更准确的说就是重新定义标签样式，“覆盖”浏览器的CSS默认属性，这就是CSS reset（CSS样式重置）。<br /><br />
+									然而reset.css是一把双刃剑，它把CSS的默认样式杀的太彻底了，比如你用 h1标签跟 p标签的显示效果是一样的，而我们就是想让 h1标签保留原本的样式，字号大一点有个标题的样子。所以，就诞生了一些不那么彻底的CSS重置来供我们使用，比如Normalize.css<br /><br />
+									Normalize.css 是一个可定制的 CSS 文件，使浏览器呈现的所有元素更一致和符合现代标准，是对CSS reset的替代。 该项目依赖于研究浏览器默认元素风格之间的差异，精确定位需要重置的样式。这是一个现代的，HTML5-ready 的 CSS 重置样式集，著名的bootstrap就使用了它，其Github地址为：https://github.com/necolas/normalize.css/。据作者描述，Normalize.css做了以下几件事：
+										<blockquote><ol>
+											<li>保留有用的浏览器默认样式而不是完全去掉它们.</li>
+											<li>为大部分HTML元素提供一般化的样式.</li>
+											<li>修复浏览器自身的bug并保证各浏览器的一致性.</li>
+											<li>用一些小技巧优化CSS可用性.</li>
+											<li>用注释和详细的文档来解释代码.</li>
+										</ol></blockquote>
+									<h4>Normalize.css源码解读</h4>以下分模块解读：
+										<pre><code>
+html {
+    font-family: sans-serif; // 1
+    -ms-text-size-adjust: 100%; // 2
+    -webkit-text-size-adjust: 100%; // 2
+}
+ 
+body {
+    margin: 0; // 3
+}
+										</code></pre>1.字体全部设为sans-serif<br />2.iOS设备屏幕旋转后可能会自动调整字体大小,将这个属性设置为100%后Safari就会不会自作主张调整大小。 设置成100%和设置成none的区别是:前者在防止浏览器自动插手字体大小的同时，可以让用户通过缩放控制字体大小;后者会让用户无法放大缩小字体。<br />3.去掉页面默认边距。<br /><br />
+										<h5>HTML5新标签的兼容性解决</h5>
+										<pre><code>
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block; // 1
+}
+ 
+ 
+audio,
+canvas,
+progress,
+video {
+  display: inline-block; 
+  vertical-align: baseline;  // 2
+}
+ 
+audio:not([controls]) {
+  display: none;
+  height: 0;  // 3
+}
+ 
+[hidden],
+template {
+  display: none; // 4
+}
+										</code></pre>1.块级元素：IE8不认识HTML5的新元素；beta版的IE9认识新元素，但没有定义正确的显示； IE10/11的details 和 summary不是block-level； IE11的main不是block-level.<br />2. Chrome, Firefox, Opera的progress没有以baseline垂直对齐.<br />3.如果audio标签没有控制栏，则应该隐藏。<br />4.hidden属性是在HTML5中新加入的属性，这个属性会帮助屏幕阅读器更方便地识别。template标签用于HTML模板，但模板信息不能在页面上显示，所以统一样式，兼容旧浏览器。<br /><br />
+										<h5>超链接样式重置</h5>
+										<pre><code>
+a {
+  background-color: transparent; // 1
+}
+ 
+a:active,
+a:hover {
+  outline: 0;  // 2
+}
+										</code></pre>1.去掉在IE10下点击超链接时出现的灰色背景。<br />2.去掉超链接在被激活或鼠标经过时出现的轮廓。<br /><br />
+										<h5>语义化标签样式重置</h5>
+										<pre><code>
+abbr[title] {
+  border-bottom: 1px dotted; // 1
+}
+ 
+b,
+strong {
+  font-weight: bold; // 2
+}
+ 
+dfn {
+    font-style: italic; // 3
+}
+ 										</code></pre>1.abbr标签在FireFox中默认有下边框（1px dotted），在Safari和Chrome中则无此样式，此处统一设置了1像素的下边框。<br />2.Firefox 4+, Safari和Chrome给 b和strong设置的其实是bolder而不是bold。此处统一设置为bold（但是HTML标准里已经说了要bolder，而且设为bold的话是不能叠加着越来越粗的）<br />3.dfn标签可标记那些对特殊术语或短语的定义，在Safari和Chrome里不是斜体，此处统一设置为斜体<br /><br />
+										<pre><code>
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;  // 1
+}
+ 
+mark {
+    background: #ff0;
+    color: #000;    // 2
+}
+ 
+small {
+    font-size: 80%; 
+}
+ 
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+ 
+sup {
+    top: -0.5em;
+}
+ 
+sub {
+    bottom: -0.25em;    // 3
+}
+										</code></pre>1.重置h1样式<br />2.mark标签是HTML5中的标签，IE8/9不支持，所以需要重置样式。<br />3.HTML标准里对small，sub和sup的大小要求都是smaller，但是normalize.css给small设的是80%，sub和sup却是75%，这里为了保持一致且不影响其他元素的行高，把两者的line-height设为0，vertical-align从baseline开始，然后用top和bottom手动设置两者偏移量。<br /><br />
+										<pre><code>
+img {
+  border: 0;   // 1
+}
+ 
+svg:not(:root) {
+  overflow: hidden;  // 2
+}
+ 
+figure {
+  margin: 1em 40px;  // 3
+}
+ 
+hr {
+  -moz-box-sizing: content-box;  // 4
+  box-sizing: content-box;
+  height: 0;
+}
+ 
+ 
+pre {
+  overflow: auto;  // 5
+}
+ 
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+										</code></pre>1.去掉旧版IE浏览器中图片默认出现的蓝色外框。<br />2.修复在IE 9/10/11中SVG的hidden显示<br />3.修复figure的margin在IE 8/9 和Safari中不生效<br />4.在Firefox中，hr元素的默认样式很多，和其它浏览器主要的差异是设置了height为2px，box-sizing为border-box。重置了这两个影响布局的样式。<br />5.大部分浏览器的pre在overflow的时候会直接溢出去，这里加上overflow:auto让它出现滚动条<br /><br />
+										<pre><code>
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit; 
+  font: inherit;
+  margin: 0; 
+}
+										</code></pre>部分浏览器会把输入框和按钮等（textarea，text，button， select）的字体和颜色设置为用户的系统字体和颜色，而不是继承父元素。所以需要重置输入框的默认样式。<br /><br />
+										<pre><code>
+button {
+  overflow: visible;  //1
+}
+ 
+button,
+select {
+  text-transform: none;
+}
+ 
+button,
+html input[type="button"], 
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;     // 2
+}
+ 
+button[disabled],
+html input[disabled] {
+  cursor: default;   // 3
+}
+         
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;    // 4
+}
+										</code></pre>1.IE 8/9/10/11里的button默认的overflow是hidden，这里统一设为可见<br />2.鼠标移动到可点击按钮上时，改箭头样式为pointer。<br />3.让不可用按钮保持默认箭头<br />4.移除 Firefox 4+ 内部的内边距<br /><br />
+										<pre><code> 
+input {
+  line-height: normal;
+}
+ 
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box; 
+  padding: 0;     // 1
+}
+         
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+ 
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box; 
+  box-sizing: content-box;    // 2
+}
+ 
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+										</code></pre>1.统一复选框和单选框的默认样式<br />2.统一search类型输入框的默认样式，让search类型输入框和普通输入框样式一样。<br /><br />
+										<pre><code> 
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em; //1
+}
+ 
+legend {
+  border: 0; 
+  padding: 0;
+}
+         
+textarea {
+  overflow: auto;  // 2
+}
+ 
+optgroup {
+  font-weight: bold;
+}
+										</code></pre>1.fieldset元素的默认样式在各浏览器中的差异较大，尤其是IE浏览器和其它浏览器，在此统一。<br />2.IE里的文本框就算文本高度没有超过指定高度，都会默认加上一个没有滚动条的滚动栏，此处去掉。<br /><br />
+										<pre><code> 
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+ 
+td,
+th {
+  padding: 0;
+}
+										</code></pre>table的默认样式很难看，大部分浏览器设置table的border-collapse为separate，border-spacing为2，此处重置表格样式。
+										<hr>2017年3月24日15:14:12
+									</p>
+									
+									<div style="float:right">
+										<a href="blog.html" class="button icon fa-home">回到首页</a>
+									</div>
+									
+								</div>
+							</section><br /><br /><hr>
+							
+						<!--评论区-->
+							<div id="uyan_frame" class="container"></div>
+							<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2128347"></script>
+
+					</div>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; 2017 SunHaichuan.</li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollzer.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
